@@ -76,8 +76,8 @@ nav a:hover{color:var(--ink)}
 .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;margin-top:.8rem}
 .seg button{border:0;background:transparent;padding:.45rem .9rem;min-height:40px;cursor:pointer;font-weight:600;font-size:.88rem;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.stage{height:210px;display:grid;place-items:center;margin:.4rem 0}
-.stage svg{width:100%;height:100%}
+.stage{height:210px;position:relative;margin:.4rem 0}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sliders{display:grid;gap:.55rem}
 .sl{display:grid;grid-template-columns:4.6rem 1fr 4.2rem;gap:.7rem;align-items:center;font-size:.9rem}
 .sl output{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
@@ -100,7 +100,7 @@ section{padding-block:3.4rem}
 .card .pic{height:150px;display:grid;place-items:center;border-bottom:1px solid var(--line);padding:.5rem}
 .card .pic svg{width:100%;height:100%}
 .card .body{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
-.card h3{font-size:1.35rem;text-transform:uppercase}
+.card h3{font-size:1.35rem;text-transform:uppercase;min-height:2.04em}
 .card .ta{font-size:.85rem;color:var(--muted);margin-top:-.15rem}
 .dims{font:600 .95rem/1 var(--body);font-variant-numeric:tabular-nums;margin-top:.2rem}
 .dims span{color:var(--muted);font-weight:500}
@@ -149,23 +149,57 @@ footer{padding-block:1.6rem 6.5rem;color:var(--muted);font-size:.85rem;border-to
 .row input{width:5.2rem;min-height:36px;border-radius:5px;border:1px solid rgba(128,128,128,.5);background:transparent;padding:0 .5rem;text-align:right}
 .row button{background:transparent;border:0;cursor:pointer;opacity:.75;font-size:1.2rem;min-width:36px;min-height:36px}
 .dock-actions{display:flex;flex-wrap:wrap;gap:.5rem;padding:.7rem 1rem}
-.size-in{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-top:.35rem}
-.size-in label{display:flex;align-items:center;gap:.25rem;font-size:.75rem;font-weight:600;color:var(--muted)}
-.size-in input{width:4rem;min-height:38px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:5px;padding:0 .35rem;font-variant-numeric:tabular-nums;text-align:right}
-.size-in .u{font-size:.8rem;color:var(--muted)}
+.size-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;align-items:end;gap:.4rem;margin-top:.35rem}
+.size-in label{display:flex;flex-direction:column;gap:.15rem;font-size:.72rem;font-weight:600;color:var(--muted);min-width:0}
+.size-in input{width:100%;min-width:0;min-height:38px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:5px;padding:0 .35rem;font-variant-numeric:tabular-nums;text-align:right}
+.size-in .u{font-size:.8rem;color:var(--muted);padding-bottom:.55rem}
 .meta{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;margin:.45rem 0 .3rem}
 .meta b{color:var(--ink)}
 .reset{border:0;background:transparent;color:var(--accent);font-weight:600;font-size:.78rem;cursor:pointer;padding:.2rem 0;text-align:left;min-height:28px}
 .filters input[type=search]{min-height:40px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:0 .7rem;min-width:0;width:11rem}
 .pic{position:relative}
-.pic .photo{width:100%;height:100%;object-fit:contain}
-.pic .sz{width:100%;height:100%;display:grid;place-items:center}
+.pic .photo{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain}
+.pic .sz{position:absolute;inset:6px}
+.pic .sz svg{width:100%;height:100%;display:block}
 .pic[data-tab="photo"] .sz{display:none}.pic[data-tab="size"] .photo{display:none}
 .tabs{position:absolute;top:6px;right:6px;display:flex;background:var(--surface);border:1px solid var(--line);border-radius:5px;overflow:hidden}
 .tabs button{border:0;background:transparent;font-size:.72rem;font-weight:600;padding:.25rem .55rem;min-height:28px;cursor:pointer;color:var(--muted)}
 .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .logo-img{height:36px;width:auto;max-width:130px;object-fit:contain}
 footer a{color:var(--accent);margin-left:.4rem}
+/* mobile-first layout */
+.dl{font:600 11px var(--body);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
+.logo{min-width:0}
+.logo span{min-width:0}
+.logo b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:52vw;font-size:1.25rem}
+.hero h1{font-size:clamp(2.3rem,9.5vw,5.2rem)}
+.stage{height:230px}
+.grid{grid-template-columns:1fr;gap:.9rem}
+.card .pic{height:180px;padding:.4rem}
+.badge{position:absolute;top:8px;left:8px;z-index:1;font-size:.7rem;font-weight:600;padding:.2rem .5rem;border-radius:4px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.badge.fw{color:var(--accent);border-color:currentColor;background:var(--surface)}
+.card .body{padding:.9rem 1rem 1rem;gap:.55rem}
+.size-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin-top:.2rem}
+.size-in label{display:flex;flex-direction:column;align-items:stretch;gap:.25rem;font-size:.7rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.size-in input{width:100%;min-width:0;min-height:46px;font-size:16px;text-align:left;padding:0 .6rem}
+.meta{margin:0}
+.acts{display:flex;gap:.6rem;align-items:center;margin-top:auto;padding-top:.2rem}
+.acts .btn{flex:1;margin-top:0;min-height:46px}
+.acts .reset{flex:none}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.filters>*{min-width:0}
+.filters #kindF{grid-column:1/-1;display:flex;width:100%}
+.filters #kindF button,.filters #unitF button{flex:1}
+.filters select,.filters input[type=search]{width:100%;min-height:46px;font-size:16px}
+.filters #unitF{display:flex;width:100%}
+.filters #unitF button{min-height:44px}
+.filters .count{grid-column:1/-1;margin:0}
+.sl input[type=range]{min-height:36px}
+.fab{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:24;min-height:44px;padding:0 1rem;font-size:.88rem;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+@media (min-width:620px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card h3{min-height:2.1em}}
+@media (min-width:760px){.filters{display:flex;flex-wrap:wrap;align-items:center}.filters #kindF{width:auto}.filters select,.filters input[type=search]{width:auto;min-height:40px}.filters input[type=search]{width:12rem}.filters #unitF{width:auto}.filters .count{margin-left:auto}.logo b{max-width:none;font-size:1.5rem}}
+@media (min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+#admin input[type=text],#admin input[type=number],#admin select{min-height:46px;font-size:16px}
 @media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
 </style>
 </head>
@@ -311,6 +345,7 @@ footer a{color:var(--accent);margin-left:.4rem}
   </div>
 </div>
 
+<a class="fab btn primary" id="fab" data-wa href="#" target="_blank" rel="noopener">WhatsApp</a>
 <script type="application/json" id="site-data">{"company": {"name": "Vel Pack Industries", "wa": "919876543210", "phone": "+91 98765 43210", "email": "hello@velpack.example", "addr": "12, Industrial Estate Road, Your City, Tamil Nadu – 000000", "logo": ""}, "products": [{"id": "f1", "k": "fw", "name": "Sparkler pack", "ta": "கம்பி மத்தாப்பு", "l": 32, "w": 6, "h": 5, "mat": "Duplex board", "photo": "", "hidden": false}, {"id": "f2", "k": "fw", "name": "Flowerpot box", "ta": "பூத்தொட்டி பெட்டி", "l": 14, "w": 14, "h": 20, "mat": "Duplex board", "photo": "", "hidden": false}, {"id": "f3", "k": "fw", "name": "Ground chakkar pack", "ta": "தரைச் சக்கரம் பெட்டி", "l": 22, "w": 22, "h": 7, "mat": "Duplex board", "photo": "", "hidden": false}, {"id": "f4", "k": "fw", "name": "Strip pack", "ta": "சரவெடி பெட்டி", "l": 12, "w": 8, "h": 4, "mat": "Duplex board", "photo": "", "hidden": false}, {"id": "f5", "k": "fw", "name": "Rocket box", "ta": "ராக்கெட் பெட்டி", "l": 40, "w": 12, "h": 12, "mat": "Duplex board", "photo": "", "hidden": false}, {"id": "f6", "k": "fw", "name": "Multi-shot fancy box", "ta": "மல்டி ஷாட் பெட்டி", "l": 32, "w": 22, "h": 26, "mat": "Laminated duplex", "photo": "", "hidden": false}, {"id": "f7", "k": "fw", "name": "Gift assortment box", "ta": "பரிசுப் பெட்டி", "l": 42, "w": 30, "h": 8, "mat": "Laminated duplex", "photo": "", "hidden": false}, {"id": "f8", "k": "fw", "name": "Family pack", "ta": "குடும்ப பேக்", "l": 55, "w": 40, "h": 14, "mat": "Laminated duplex", "photo": "", "hidden": false}, {"id": "f9", "k": "fw", "name": "Master carton", "ta": "மாஸ்டர் கார்டன்", "l": 62, "w": 42, "h": 42, "mat": "5 ply corrugated", "photo": "", "hidden": false}, {"id": "s1", "k": "sh", "name": "Mailer box small", "ta": "சிறிய மெயிலர் பெட்டி", "l": 20, "w": 15, "h": 8, "mat": "3 ply corrugated", "photo": "", "hidden": false}, {"id": "s2", "k": "sh", "name": "Mailer box medium", "ta": "நடுத்தர மெயிலர் பெட்டி", "l": 32, "w": 24, "h": 10, "mat": "3 ply corrugated", "photo": "", "hidden": false}, {"id": "s3", "k": "sh", "name": "Tall bottle box", "ta": "உயரமான பாட்டில் பெட்டி", "l": 14, "w": 14, "h": 34, "mat": "3 ply corrugated", "photo": "", "hidden": false}, {"id": "s4", "k": "sh", "name": "Standard carton", "ta": "சாதாரண கார்டன்", "l": 40, "w": 30, "h": 30, "mat": "5 ply corrugated", "photo": "", "hidden": false}, {"id": "s5", "k": "sh", "name": "Large carton", "ta": "பெரிய கார்டன்", "l": 60, "w": 40, "h": 40, "mat": "5 ply corrugated", "photo": "", "hidden": false}, {"id": "s6", "k": "sh", "name": "Heavy-duty carton", "ta": "கனமான கார்டன்", "l": 75, "w": 50, "h": 50, "mat": "7 ply corrugated", "photo": "", "hidden": false}, {"id": "s7", "k": "sh", "name": "Flat carton", "ta": "தட்டையான கார்டன்", "l": 90, "w": 60, "h": 15, "mat": "5 ply corrugated", "photo": "", "hidden": false}, {"id": "s8", "k": "sh", "name": "Pallet carton", "ta": "பேலட் கார்டன்", "l": 110, "w": 80, "h": 70, "mat": "7 ply corrugated", "photo": "", "hidden": false}]}</script>
 <script>
 var DATA = JSON.parse(document.getElementById("site-data").textContent); // built-in default, replaced by data.json when it loads
@@ -360,15 +395,22 @@ function dimStr(l,w,h){return fmt(l)+" × "+fmt(w)+" × "+fmt(h)+" "+ulabel()}
 var $ = function(s){return document.querySelector(s)};
 var t = function(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k};
 
-function iso(l,w,h,k,W,H,pad){
+function iso(l,w,h,k,W,H,pad,opt){
+  opt=opt||{};
   var c=Math.cos(Math.PI/6);
   var P=function(x,y,z){return [(x-y)*c,(x+y)*0.5-z]};
-  var cs=[[0,0,0],[l,0,0],[0,w,0],[l,w,0],[0,0,h],[l,0,h],[0,w,h],[l,w,h]].map(function(p){return P(p[0],p[1],p[2])});
-  var xs=cs.map(function(p){return p[0]}), ys=cs.map(function(p){return p[1]});
-  var mnx=Math.min.apply(0,xs),mxx=Math.max.apply(0,xs),mny=Math.min.apply(0,ys),mxy=Math.max.apply(0,ys);
-  var s=Math.min((W-2*pad)/(mxx-mnx),(H-2*pad)/(mxy-mny));
-  var ox=(W-(mxx-mnx)*s)/2-mnx*s, oy=(H-(mxy-mny)*s)/2-mny*s;
-  var Q=function(p){var a=P(p[0],p[1],p[2]);return (a[0]*s+ox).toFixed(1)+","+(a[1]*s+oy).toFixed(1)};
+  var ext=function(a,b,d){
+    var q=[[0,0,0],[a,0,0],[0,b,0],[a,b,0],[0,0,d],[a,0,d],[0,b,d],[a,b,d]].map(function(p){return P(p[0],p[1],p[2])});
+    var xs=q.map(function(p){return p[0]}),ys=q.map(function(p){return p[1]});
+    return {x0:Math.min.apply(0,xs),x1:Math.max.apply(0,xs),y0:Math.min.apply(0,ys),y1:Math.max.apply(0,ys)};
+  };
+  var fit=function(e){return Math.min((W-2*pad)/(e.x1-e.x0),(H-2*pad)/(e.y1-e.y0))};
+  var e=ext(l,w,h),s=fit(e);
+  /* Keep one scale for a box's original size, so a bigger or smaller size really looks bigger or smaller. */
+  if(opt.ref)s=Math.min(s,fit(ext(opt.ref[0],opt.ref[1],opt.ref[2]))*(opt.room||0.72));
+  var ox=(W-(e.x1-e.x0)*s)/2-e.x0*s,oy=(H-(e.y1-e.y0)*s)/2-e.y0*s;
+  var X=function(p){var a=P(p[0],p[1],p[2]);return [a[0]*s+ox,a[1]*s+oy]};
+  var Q=function(p){var a=X(p);return a[0].toFixed(1)+","+a[1].toFixed(1)};
   var poly=function(a,cl){return '<polygon class="'+cl+'" points="'+a.map(Q).join(" ")+'"/>'};
   var out=poly([[0,w,0],[l,w,0],[l,w,h],[0,w,h]],"l")+poly([[l,0,0],[l,w,0],[l,w,h],[l,0,h]],"r")+poly([[0,0,h],[l,0,h],[l,w,h],[0,w,h]],"t");
   if(k==="fw"){
@@ -376,8 +418,13 @@ function iso(l,w,h,k,W,H,pad){
   } else {
     out+=poly([[l*.44,0,h],[l*.56,0,h],[l*.56,w,h],[l*.44,w,h]],"tape")+poly([[l*.44,w,h],[l*.56,w,h],[l*.56,w,h*.72],[l*.44,w,h*.72]],"tape");
   }
+  if(opt.lab){
+    var tx=function(p,dx,dy,an,txt){var a=X(p);return '<text class="dl" x="'+(a[0]+dx).toFixed(1)+'" y="'+(a[1]+dy).toFixed(1)+'" text-anchor="'+an+'">'+txt+'</text>'};
+    out+=tx([l/2,w,0],-9,15,"middle",opt.lab[0])+tx([l,w/2,0],9,15,"middle",opt.lab[1])+tx([0,w,h/2],-7,4,"end",opt.lab[2]);
+  }
   return '<svg class="box '+k+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Box '+l+' by '+w+' by '+h+' cm">'+out+'</svg>';
 }
+function cardSvg(p,c){return iso(c.l,c.w,c.h,p.k,200,150,24,{ref:[p.l,p.w,p.h],room:.8,lab:[fmt(c.l),fmt(c.w),fmt(c.h)]})}
 function sizeClass(p){var m=Math.max(p.l,p.w,p.h);return m<=25?"S":m<=50?"M":"L"}
 
 function curOf(p){return cur[p.id]||{l:p.l,w:p.w,h:p.h}}
@@ -392,15 +439,16 @@ function renderGrid(){
   var step=unit==="in"?0.5:1;
   $("#grid").innerHTML=list.map(function(p){
     var c=curOf(p),added=enquiry.some(function(e){return e.id===keyOf(p)});
-    var inp=function(d){return '<label>'+d.toUpperCase()+'<input type="number" inputmode="decimal" min="1" max="400" step="'+step+'" value="'+fmt(c[d])+'" data-dim="'+d+'" aria-label="'+d.toUpperCase()+' '+esc(p.name)+'"></label>'};
     var tab=tabs[p.id]||(p.photo?"photo":"size");
-    return '<article class="card" data-card="'+p.id+'"><div class="pic" data-tab="'+tab+'">'+(p.photo?'<img class="photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'" loading="lazy"><div class="tabs">'+["photo","size"].map(function(x){return '<button type="button" data-tabset="'+p.id+'" data-tabval="'+x+'" aria-pressed="'+(tab===x)+'">'+t(x==="photo"?"photo":"size_tab")+'</button>'}).join("")+'</div>':'')+'<div class="sz">'+iso(c.l,c.w,c.h,p.k,200,140,10)+'</div></div><div class="body">'+
+    var lab=function(d,name){return '<label>'+name+' ('+ulabel()+')<input type="number" inputmode="decimal" min="1" max="400" step="'+step+'" value="'+fmt(c[d])+'" data-dim="'+d+'" aria-label="'+name+' '+esc(p.name)+'"></label>'};
+    return '<article class="card" data-card="'+p.id+'"><div class="pic" data-tab="'+tab+'"><span class="badge'+(p.k==="fw"?' fw':'')+'">'+(p.k==="fw"?t("kind_fw"):t("kind_sh"))+'</span>'+
+      (p.photo?'<img class="photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'" loading="lazy"><div class="tabs">'+["photo","size"].map(function(x){return '<button type="button" data-tabset="'+p.id+'" data-tabval="'+x+'" aria-pressed="'+(tab===x)+'">'+t(x==="photo"?"photo":"size_tab")+'</button>'}).join("")+'</div>':'')+
+      '<div class="sz">'+cardSvg(p,c)+'</div></div><div class="body">'+
       '<h3>'+esc(p.name)+'</h3>'+(lang==="ta"&&p.ta?'<div class="ta">'+esc(p.ta)+'</div>':'')+
-      '<div class="size-in">'+inp("l")+inp("w")+inp("h")+'<span class="u">'+ulabel()+'</span></div>'+
+      '<div class="size-in">'+lab("l",t("len"))+lab("w",t("wid"))+lab("h",t("hgt"))+'</div>'+
       '<div class="meta" data-meta>'+metaHtml(p)+'</div>'+
-      '<div class="tags"><span class="tag '+(p.k==="fw"?'fw':'')+'">'+(p.k==="fw"?t("kind_fw"):t("kind_sh"))+'</span></div>'+
-      '<button type="button" class="reset" data-reset="'+p.id+'"'+(changed(p)?'':' hidden')+'>'+t("reset")+'</button>'+
-      '<button type="button" class="btn" data-add="'+p.id+'">'+(added?t("added"):t("add_enq"))+'</button></div></article>';
+      '<div class="acts"><button type="button" class="reset" data-reset="'+p.id+'"'+(changed(p)?'':' hidden')+'>'+t("reset")+'</button>'+
+      '<button type="button" class="btn" data-add="'+p.id+'">'+(added?t("added"):t("add_enq"))+'</button></div></div></article>';
   }).join("");
   $("#count").textContent=list.length+" "+t("shown");
 }
@@ -413,7 +461,7 @@ function boardFor(k,l,w,h){
 function renderBuilder(){
   var l=+$("#bl").value,w=+$("#bw").value,h=+$("#bh").value;
   $("#blo").textContent=fmt(l)+" "+ulabel();$("#bwo").textContent=fmt(w)+" "+ulabel();$("#bho").textContent=fmt(h)+" "+ulabel();
-  $("#stage").innerHTML=iso(l,w,h,bKind,260,210,14);
+  $("#stage").innerHTML=iso(l,w,h,bKind,260,220,24,{ref:[45,30,30],room:.9,lab:[fmt(l),fmt(w),fmt(h)]});
   var v=l*w*h/1000;
   $("#rvol").textContent=(v>=100?v.toFixed(0):v.toFixed(1))+" L";
   $("#rboard").textContent=boardFor(bKind,l,w,h);
@@ -431,7 +479,7 @@ function waText(){
 }
 function renderDock(){
   var n=enquiry.length;
-  $("#dock").hidden=n===0;
+  $("#dock").hidden=n===0;var fb=$("#fab");if(fb)fb.hidden=n>0;
   $("#dockN").textContent=n;
   $("#dockList").innerHTML=enquiry.map(function(e,i){
     return '<div class="row"><div>'+esc(e.name)+'<small>'+dimStr(e.l,e.w,e.h)+' · '+esc(e.mat)+'</small></div>'+
@@ -479,7 +527,7 @@ document.addEventListener("input",function(e){
     var card=e.target.closest("[data-card]"),p=PRODUCTS.filter(function(x){return x.id===card.dataset.card})[0];
     var v=parseFloat(e.target.value);if(!(v>0))return;
     var c=cur[p.id]||(cur[p.id]={l:p.l,w:p.w,h:p.h});c[e.target.dataset.dim]=Math.min(400,toCm(v));
-    card.querySelector(".sz").innerHTML=iso(c.l,c.w,c.h,p.k,200,140,10);
+    card.querySelector(".sz").innerHTML=cardSvg(p,c);
     var pic=card.querySelector(".pic");if(pic.dataset.tab==="photo"){pic.dataset.tab="size";tabs[p.id]="size";pic.querySelectorAll("[data-tabset]").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.tabval==="size"))})}
     card.querySelector("[data-meta]").innerHTML=metaHtml(p);
     card.querySelector("[data-reset]").hidden=!changed(p);
